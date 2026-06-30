@@ -1,0 +1,23 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/utils/Strings.sol";
+
+contract simplebillgst {
+    using Strings for uint256;
+
+    uint public bill;
+    string public dot = ".";
+    uint public tax;
+ 
+    function setbill(uint total) public {
+        bill = total;
+        tax = bill * 18;
+        bill = bill+ (tax/100);
+        tax= tax-((tax/100)*100);
+    }
+
+    function getbill() public view returns (string memory) {
+        return string(abi.encodePacked(bill.toString(), dot, tax.toString()));
+    }
+}
